@@ -4,6 +4,7 @@ module.exports = {
   findById,
   findSteps,
   add,
+  addStep
 };
 
 function find() {
@@ -25,7 +26,11 @@ function findSteps(scheme_id) {
     .where({ scheme_id });
 }
 
-function add({scheme_name}) {
-    return db("schemes").insert({scheme_name});
-    
+function add({ scheme_name }) {
+  return db("schemes").insert({ scheme_name });
+}
+
+function addStep({ step_number, instructions, scheme_id }) {
+  // This is the equivalent of INSERT INTO steps (step_number, instructions, scheme_id) VALUES (6,"sign up to twitter", 6);
+  return "steps".insert({ step_number, instructions, scheme_id });
 }
