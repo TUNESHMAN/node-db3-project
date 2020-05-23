@@ -3,6 +3,7 @@ module.exports = {
   find,
   findById,
   findSteps,
+  add,
 };
 
 function find() {
@@ -18,8 +19,13 @@ function findById(id) {
 function findSteps(scheme_id) {
   // This is the equivalent of SELECT steps.instructions, schemes.scheme_name FROM STEPS JOIN Schemes ON steps.scheme_id = schemes.id
   return db
-    .select("steps.instructions")
+    .select("schemes.scheme_name", "steps.instructions")
     .from("steps")
     .join("schemes", "steps.scheme_id", "schemes.id")
     .where({ scheme_id });
+}
+
+function add({scheme_name}) {
+    return db("schemes").insert({scheme_name});
+    
 }
