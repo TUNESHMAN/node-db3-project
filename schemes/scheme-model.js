@@ -4,7 +4,9 @@ module.exports = {
   findById,
   findSteps,
   add,
-  addStep
+  addStep,
+  update,
+  remove
 };
 
 function find() {
@@ -32,5 +34,16 @@ function add({ scheme_name }) {
 
 function addStep({ step_number, instructions, scheme_id }) {
   // This is the equivalent of INSERT INTO steps (step_number, instructions, scheme_id) VALUES (6,"sign up to twitter", 6);
-  return "steps".insert({ step_number, instructions, scheme_id });
+  return db("steps").insert({ step_number, instructions, scheme_id });
 }
+
+function update(id, scheme_name ) {
+    // Equivalent of UPDATE schemes SET scheme_name="hello" where id = 5;
+  return db("schemes").where({ id }).update({ scheme_name });
+}
+
+function remove(id) {
+    return db("schemes").where({id}).del();
+  
+}
+

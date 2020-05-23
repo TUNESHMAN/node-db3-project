@@ -87,7 +87,7 @@ router.put('/:id', (req, res) => {
   Schemes.findById(id)
   .then(scheme => {
     if (scheme) {
-      Schemes.update(changes, id)
+      Schemes.update(id,changes.scheme_name)
       .then(updatedScheme => {
         res.json(updatedScheme);
       });
@@ -96,6 +96,8 @@ router.put('/:id', (req, res) => {
     }
   })
   .catch (err => {
+    console.log(updatedScheme);
+    
     res.status(500).json({ message: 'Failed to update scheme' });
   });
 });
